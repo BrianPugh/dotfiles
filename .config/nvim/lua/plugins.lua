@@ -16,7 +16,7 @@ local use = require('packer').use
 require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Package manager
 
-    -- Mapx (More elegant keymapping and commands)
+    -- MapX (More elegant keymapping and commands)
     use "b0o/mapx.nvim"
 
     -- Telescope (Fuzzy Finder)
@@ -26,13 +26,16 @@ require('packer').startup(function()
     -- Airline (Status Bar)
     use "vim-airline/vim-airline"
 
-    -- Syntax checking
-    use 'dense-analysis/ale'
+    -- Syntax highlighting
     use 'sheerun/vim-polyglot'
 
     -- Git Stuff
     use 'tpope/vim-fugitive'
     use 'airblade/vim-gitgutter'
+
+    -- CoC (Conquer of Completion)
+    -- CocInstall coc-spell-checker coc-pyright coc-json coc-docker coc-yaml coc-prettier
+    use { 'neoclide/coc.nvim', branch='release' }
 
     -- Other stuff
     use "lukas-reineke/indent-blankline.nvim"
@@ -63,7 +66,7 @@ require('telescope').load_extension('fzy_native')
 nnoremap(';', 'isdirectory(\'.git\') ? \':lua require("telescope.builtin").git_files()<CR>\' : \':lua require("telescope.builtin").find_files()<CR>\'', {"silent", "expr"}
   )
 nnoremap('<leader>;', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], "silent")
-nnoremap('<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "silent")
+nnoremap('<leader>gr', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "silent")
 
 -- ALE
 vim.g.ale_fix_on_save = 1
@@ -97,8 +100,10 @@ require("indent_blankline").setup {
     },
 }
 
--- Python
-vim.g.python_highlight_all = 1
-
 -- GitGutter
 vim.signcolumn = true
+
+-- CoC
+nmap('<leader>gd', [[<Plug>(coc-definition)]], "silent") -- goto definition
+nmap('<leader>gv', [[:vsp<CR><Plug>(coc-definition)<C-W>L]], "silent") -- goto definition in vsplit
+nmap('<leader>rn', [[<Plug>(coc-rename)]])
