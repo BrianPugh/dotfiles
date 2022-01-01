@@ -11,6 +11,13 @@ bindkey "^[[F" end-of-line
 alias gs='git status'
 alias gd='git diff'
 alias ga='git add'
+alias gc='git commit -m'
+
+# yadm
+alias ys='yadm status'
+alias yd='yadm diff'
+alias ya='yadm add'
+alias yc='yadm commit -m'
 
 # Misc
 alias cat='bat'
