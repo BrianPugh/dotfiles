@@ -30,6 +30,10 @@ require('packer').startup(function()
     use 'dense-analysis/ale'
     use 'sheerun/vim-polyglot'
 
+    -- Git Stuff
+    use 'tpope/vim-fugitive'
+    use 'airblade/vim-gitgutter'
+
     -- Other stuff
     use "lukas-reineke/indent-blankline.nvim"
 end)
@@ -95,3 +99,6 @@ require("indent_blankline").setup {
 
 -- Python
 vim.g.python_highlight_all = 1
+
+-- GitGutter
+vim.signcolumn = true
