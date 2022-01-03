@@ -2,5 +2,10 @@
   "coc.preferences.formatOnSaveFiletypes": ["py", "python", "yaml", "json"],
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "black",
-  "diagnostic.checkCurrentLine": true
+  "diagnostic.checkCurrentLine": true,
+  "snippets.ultisnips.directories":
+  [
+    "UltiSnips",
+    "~/.config/nvim/utils/snips"
+  ]
 }

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+system_type=$(uname -s)
+
+
+if [ "$system_type" = "Darwin" ]; then
+
+  # install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+  fi
+
+  # Install packages
+  brew install neovim tmux ripgrep fd node pyenv
+
+  # Setup Python
+  python_version=3.9.9  # We'll upgrade to 3.10 as it gets more popular
+  pyenv install $python_version
+  pyenv global $python_version
+
+else
+  # TODO: linux support
+  echo "System not supported, doing nothing."
+fi

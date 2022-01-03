@@ -32,7 +32,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
 fi
 export PYTHONSTARTUP="${HOME}/.startup.py"
-export PATH="/Users/brianpugh/python_scripts:$PATH"
+export PATH="$HOME/python_scripts:$PATH"
 
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"

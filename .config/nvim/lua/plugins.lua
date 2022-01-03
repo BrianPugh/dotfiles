@@ -34,9 +34,9 @@ require('packer').startup(function()
     use 'airblade/vim-gitgutter'
 
     -- CoC (Conquer of Completion)
-    -- CocInstall coc-spell-checker coc-pyright coc-json coc-docker coc-yaml coc-prettier
     use { 'neoclide/coc.nvim', branch='release' }
     use 'rafcamlet/coc-nvim-lua'
+    use 'honza/vim-snippets'
 
     -- Other stuff
     use "lukas-reineke/indent-blankline.nvim"
@@ -104,8 +104,4 @@ require("indent_blankline").setup {
 -- GitGutter
 vim.signcolumn = "number"
 
--- CoC
---nmap('<leader>gd', [[<Plug>(coc-definition)]], "silent") -- goto definition
---nmap('<leader>gv', [[:vsp<CR><Plug>(coc-definition)<C-W>L]], "silent") -- goto definition in vsplit
---nmap('<leader>rn', [[<Plug>(coc-rename)]])
--- Use tab for trigger completion with characters ahead and navigate.
+-- CoC  (see plugins/coc.vim)
