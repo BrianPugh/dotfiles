@@ -38,6 +38,10 @@ require('packer').startup(function()
     use 'rafcamlet/coc-nvim-lua'
     use 'honza/vim-snippets'
 
+    -- Rst
+    use 'Rykka/riv.vim'
+    --use 'Rykka/InstantRst'
+
     -- Other stuff
     use "lukas-reineke/indent-blankline.nvim"
 end)
@@ -105,3 +109,5 @@ require("indent_blankline").setup {
 vim.signcolumn = "number"
 
 -- CoC  (see plugins/coc.vim)
+
+-- Rst
