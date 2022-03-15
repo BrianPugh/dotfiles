@@ -28,6 +28,7 @@ if [ "$system_type" = "Darwin" ]; then
 
 else
   # Ubuntu
+  DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
   $SUDO apt update
 
   # Easy to install things
