@@ -1,7 +1,9 @@
 #!/bin/sh
 
 system_type=$(uname -s)
+system_arch=$(uname -m)
 
+SUDO=$(which sudo)
 
 if [ "$system_type" = "Darwin" ]; then
 
@@ -25,6 +27,42 @@ if [ "$system_type" = "Darwin" ]; then
   pyenv global $python_version
 
 else
-  # TODO: linux support
-  echo "System not supported, doing nothing."
+  # Ubuntu
+  $SUDO apt update
+
+  # Easy to install things
+  $SUDO apt install -y tmux ripgrep fd-find curl zsh wget software-properties-common
+
+  # Change default shell to zsh
+  chsh -s $(which zsh)
+
+  # Install bat (improved cat replacement)
+  if [ "$system_arch" = "aarch64" ]; then
+    BAT_DEB_FN=bat_0.20.0_arm64.deb
+  elif [ "$system_arch" = "x86_64" ]; then
+    BAT_DEB_FN=bat_0.20.0_amd64.deb
+  else
+    echo "Unknown system architecture $system_arch"
+    exit 1
+  fi
+
+  wget https://github.com/sharkdp/bat/releases/download/v0.20.0/$BAT_DEB_FN
+  $SUDO apt install ./$BAT_DEB_FN
+  rm $BAT_DEB_FN
+
+  # Install node
+  if [ -z "$SUDO" ]; then
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+  else
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | $SUDO -E bash -
+  fi
+  apt-get install -y nodejs
+
+  # Install neovim
+  $SUDO add-apt-repository ppa:neovim-ppa/unstable -y
+  $SUDO apt update
+  $SUDO apt install -y neovim
+
+  # Install neovim plugins
+  nvim +PackerCompile +PackerSync
 fi
