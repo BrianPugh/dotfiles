@@ -51,7 +51,11 @@ else
   rm $BAT_DEB_FN
 
   # Install node
-  curl -fsSL https://deb.nodesource.com/setup_lts.x | $SUDO -E bash -
+  if [ -z ${SUDO+x} ]; then
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+  else
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | $SUDO -E bash -
+  fi
 
   # Install neovim
   curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
