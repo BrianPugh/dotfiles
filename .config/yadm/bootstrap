@@ -31,7 +31,7 @@ else
   $SUDO apt update
 
   # Easy to install things
-  $SUDO apt install -y tmux ripgrep fd-find curl zsh wget snapd
+  $SUDO apt install -y tmux ripgrep fd-find curl zsh wget software-properties-common
 
   # Change default shell to zsh
   chsh -s $(which zsh)
@@ -59,7 +59,9 @@ else
   apt-get install -y nodejs
 
   # Install neovim
-  $SUDO snap install --classic nvim
+  $SUDO add-apt-repository ppa:neovim-ppa/unstable
+  $SUDO apt update
+  $SUDO apt install neovim
 
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
