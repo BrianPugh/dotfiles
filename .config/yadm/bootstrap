@@ -37,11 +37,12 @@ else
   chsh -s $(which zsh)
 
   # Install bat (improved cat replacement)
-  if [ "$system_type" = "aarch64" ]; then
+  if [ "$system_arch" = "aarch64" ]; then
     BAT_DEB_FN=bat_0.20.0_arm64.deb
-  elif [ "$system_type" = "x86_64" ]; then
+  elif [ "$system_arch" = "x86_64" ]; then
     BAT_DEB_FN=bat_0.20.0_amd64.deb
   else
+    echo "Unknown system architecture $system_arch"
     exit 1
   fi
 
