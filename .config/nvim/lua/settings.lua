@@ -41,10 +41,18 @@ vim.o.directory = '/.vim/tmp/swap//'   -- swap files
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Tabes
+-- Tabes and splits
 nnoremap('t', ":tabe<CR>")
-nnoremap('h', ":tabp<CR>")
-nnoremap('l', ":tabn<CR>")
+
+nnoremap('h', "<C-W>h")
+nnoremap('j', "<C-W>j")
+nnoremap('k', "<C-W>k")
+nnoremap('l', "<C-W>l")
+
+nnoremap('<C-h>', ":tabp<CR>")
+nnoremap('<C-h>', ":tabp<CR>")
+nnoremap('<C-l>', ":tabn<CR>")
+
 
 -- File-specific
 vim.cmd([[

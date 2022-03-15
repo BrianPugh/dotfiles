@@ -39,3 +39,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Vim
 alias vim='nvim'
+
+# Secrets
+source ~/.zsecrets
+
+# Kitty nonsense
+alias ssh="kitty +kitten ssh"
