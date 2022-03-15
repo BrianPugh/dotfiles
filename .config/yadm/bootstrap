@@ -51,7 +51,7 @@ else
   rm $BAT_DEB_FN
 
   # Install node
-  if [ -z ${SUDO+x} ]; then
+  if [ -z "$SUDO" ]; then
     curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
   else
     curl -fsSL https://deb.nodesource.com/setup_lts.x | $SUDO -E bash -
