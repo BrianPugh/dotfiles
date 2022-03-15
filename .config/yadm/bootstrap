@@ -2,6 +2,7 @@
 
 system_type=$(uname -s)
 
+SUDO=$(which sudo)
 
 if [ "$system_type" = "Darwin" ]; then
 
@@ -25,6 +26,28 @@ if [ "$system_type" = "Darwin" ]; then
   pyenv global $python_version
 
 else
-  # TODO: linux support
-  echo "System not supported, doing nothing."
+  # Ubuntu
+  $SUDO apt update
+
+  # Easy to install things
+  $SUDO apt install tmux ripgrep fd-find curl zsh
+
+  # Change default shell to zsh
+  chsh -s $(which zsh)
+
+  # Install bat (improved cat replacement)
+  BAT_DEB_FN=bat_0.20.0_amd64.deb
+  wget https://github.com/sharkdp/bat/releases/download/v0.20.0/$BAT_DEB_FN
+  $SUDO apt install -i ./$BAT_DEB_FN
+
+  # Install node
+  curl -fsSL https://deb.nodesource.com/setup_lts.x | $SUDO -E bash -
+
+  # Install neovim
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  chmod u+x nvim.appimage
+  $SUDO mv nvim.appimage /user/bin/nvim
+
+  # Install neovim plugins
+  nvim +PackerCompile +PackerSync
 fi
