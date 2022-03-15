@@ -19,7 +19,7 @@ if [ "$system_type" = "Darwin" ]; then
   fi
 
   # Install packages
-  brew install curl neovim tmux ripgrep fd node pyenv snapd
+  brew install curl neovim tmux ripgrep fd node pyenv
 
   # Setup Python
   python_version=3.9.9  # We'll upgrade to 3.10 as it gets more popular
@@ -31,7 +31,7 @@ else
   $SUDO apt update
 
   # Easy to install things
-  $SUDO apt install -y tmux ripgrep fd-find curl zsh wget
+  $SUDO apt install -y tmux ripgrep fd-find curl zsh wget snapd
 
   # Change default shell to zsh
   chsh -s $(which zsh)
