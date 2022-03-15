@@ -59,9 +59,9 @@ else
   apt-get install -y nodejs
 
   # Install neovim
-  $SUDO add-apt-repository ppa:neovim-ppa/unstable
+  $SUDO add-apt-repository ppa:neovim-ppa/unstable -y
   $SUDO apt update
-  $SUDO apt install neovim
+  $SUDO apt install -y neovim
 
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
