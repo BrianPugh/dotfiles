@@ -19,7 +19,7 @@ if [ "$system_type" = "Darwin" ]; then
   fi
 
   # Install packages
-  brew install curl neovim tmux ripgrep fd node pyenv
+  brew install curl neovim tmux ripgrep fd node pyenv snapd
 
   # Setup Python
   python_version=3.9.9  # We'll upgrade to 3.10 as it gets more popular
@@ -59,9 +59,7 @@ else
   apt-get install -y nodejs
 
   # Install neovim
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-  chmod u+x nvim.appimage
-  $SUDO mv nvim.appimage /usr/local/bin/nvim
+  $SUDO snap install --classic nvim
 
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
