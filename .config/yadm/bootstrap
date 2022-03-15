@@ -56,11 +56,12 @@ else
   else
     curl -fsSL https://deb.nodesource.com/setup_lts.x | $SUDO -E bash -
   fi
+  apt-get install -y nodejs
 
   # Install neovim
   curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
   chmod u+x nvim.appimage
-  $SUDO mv nvim.appimage /user/bin/nvim
+  $SUDO mv nvim.appimage /usr/local/bin/nvim
 
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
