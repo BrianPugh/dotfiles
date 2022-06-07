@@ -85,3 +85,6 @@ else
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
 fi
+
+# Generate new ssh keys
+ssh-keygen -t ed25519
