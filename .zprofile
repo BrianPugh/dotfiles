@@ -34,9 +34,6 @@ fi
 export PYTHONSTARTUP="${HOME}/.startup.py"
 export PATH="$HOME/python_scripts:$PATH"
 
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Vim
 alias vim='nvim'
 
@@ -45,3 +42,17 @@ source ~/.zsecrets
 
 # Kitty nonsense
 alias ssh="kitty +kitten ssh"
+
+# python applications
+export PATH="$HOME/.local/bin:$PATH"
+
+if command apt > /dev/null; then
+  # debian
+  export TERM=xterm
+  export PATH=$PATH:/snap/bin
+elif [[ `uname` == "Darwin" ]]; then
+  # MacOS
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    echo 'Unknown OS!'
+fi
