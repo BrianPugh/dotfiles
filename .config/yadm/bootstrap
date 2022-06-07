@@ -41,6 +41,9 @@ else
     BAT_DEB_FN=bat_0.20.0_arm64.deb
   elif [ "$system_arch" = "x86_64" ]; then
     BAT_DEB_FN=bat_0.20.0_amd64.deb
+  elif [ "$system_arch" = "armv7l" ]; then
+    # 32-bit Raspberry pi
+    BAT_DEB_FN=bat_0.20.0_armhf.deb
   else
     echo "Unknown system architecture $system_arch"
     exit 1
