@@ -40,6 +40,9 @@ alias vim='nvim'
 # Secrets
 source ~/.zsecrets
 
+# System specific stuff
+test -f ~/.zsystem && source ~/.zsystem
+
 # Kitty nonsense
 alias ssh="kitty +kitten ssh"
 
