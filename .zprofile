@@ -49,7 +49,7 @@ alias ssh="kitty +kitten ssh"
 # python applications
 export PATH="$HOME/.local/bin:$PATH"
 
-if command apt > /dev/null; then
+if command apt &> /dev/null; then
   # debian
   export TERM=xterm
   export PATH=$PATH:/snap/bin
