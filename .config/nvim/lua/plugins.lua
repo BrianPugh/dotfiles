@@ -21,7 +21,6 @@ require('packer').startup(function()
 
     -- Telescope (Fuzzy Finder)
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-    use 'nvim-telescope/telescope-fzy-native.nvim'
 
     -- Airline (Status Bar)
     use "vim-airline/vim-airline"
@@ -50,24 +49,7 @@ require'mapx'.setup{ global = true }
 
 -- Telescope
 local actions = require("telescope.actions")
-require('telescope').setup {
-    defaults = {
-        file_sorter = require('telescope.sorters').get_fzy_sorter,
-        prompt_prefix = '>',
-    mappings = {
-      i = {
-          ["<esc>"] = actions.close,
-      },
-    },
-  },
-  extensions = {
-      fzy_native = {
-          override_generic_sorter = false,
-          override_file_sorter = true,
-      }
-  }
-}
-require('telescope').load_extension('fzy_native')
+require('telescope').setup {}
 nnoremap(';', 'isdirectory(\'.git\') ? \':lua require("telescope.builtin").git_files()<CR>\' : \':lua require("telescope.builtin").find_files()<CR>\'', {"silent", "expr"}
   )
 nnoremap('<leader>;', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], "silent")
