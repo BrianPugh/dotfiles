@@ -80,7 +80,7 @@ else
   $SUDO apt install -y nodejs
 
   # Install neovim
-  $SUDO snap install nvim --channel=latest/edg
+  $SUDO snap install nvim --channel=latest/edge
 
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
