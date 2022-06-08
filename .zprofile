@@ -38,7 +38,7 @@ export PATH="$HOME/python_scripts:$PATH"
 alias vim='nvim'
 
 # Secrets
-source ~/.zsecrets
+test -f ~/.zsecrets && source ~/.zsecrets
 
 # System specific stuff
 test -f ~/.zsystem && source ~/.zsystem
@@ -49,13 +49,11 @@ alias ssh="kitty +kitten ssh"
 # python applications
 export PATH="$HOME/.local/bin:$PATH"
 
-if command apt &> /dev/null; then
-  # debian
-  export TERM=xterm
-  export PATH=$PATH:/snap/bin
-elif [[ `uname` == "Darwin" ]]; then
+if [[ `uname` == "Darwin" ]]; then
   # MacOS
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-    echo 'Unknown OS!'
+  # debian
+  export TERM=xterm
+  export PATH=$PATH:/snap/bin
 fi
