@@ -21,6 +21,7 @@ alias yc='yadm commit -m'
 
 # Misc
 alias cat='bat'
+alias sudo='sudo '
 
 # ARM Development
 export GCC_PATH=/Applications/ARM/bin
@@ -36,6 +37,12 @@ export PATH="$HOME/python_scripts:$PATH"
 
 # Vim
 alias vim='nvim'
+export EDITOR=nvim
+export SYSTEMD_EDITOR="$EDITOR"
+export FCEDIT="$EDITOR"
+export VISUAL="$EDITOR"
+export SUDO_EDITOR="$EDITOR"
+
 
 # Secrets
 test -f ~/.zsecrets && source ~/.zsecrets
