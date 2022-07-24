@@ -64,3 +64,12 @@ else
   export TERM=xterm
   export PATH=$PATH:/snap/bin
 fi
+
+# misc keybindings
+bindkey "\E[1~" beginning-of-line
+bindkey "\E[4~" end-of-line
+bindkey "\E[H" beginning-of-line
+bindkey "\E[F" end-of-line
+bindkey "\E[3~" delete-char
+bindkey "^[OF" end-of-line
+bindkey "^[OH" beginning-of-line
