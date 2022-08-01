@@ -2,6 +2,9 @@
 precmd () {print -Pn "\e]0;%~\a"}
 export PROMPT="%m:%~$ "
 
+# Search
+alias grep='grep --exclude-dir=".git"'
+
 # Navigation
 alias ll='ls -alhG'
 bindkey "^[[H" beginning-of-line
@@ -51,7 +54,7 @@ test -f ~/.zsecrets && source ~/.zsecrets
 test -f ~/.zsystem && source ~/.zsystem
 
 # Kitty nonsense
-alias ssh="kitty +kitten ssh"
+#alias ssh="kitty +kitten ssh"
 
 # python applications
 export PATH="$HOME/.local/bin:$PATH"
