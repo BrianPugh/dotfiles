@@ -64,8 +64,9 @@ if [[ `uname` == "Darwin" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   # debian
-  export TERM=xterm
+  export TERM=xterm-256color
   export PATH=$PATH:/snap/bin
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
 
 # misc keybindings
