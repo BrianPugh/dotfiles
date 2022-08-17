@@ -6,6 +6,7 @@ export PROMPT="%m:%~$ "
 alias grep='grep --exclude-dir=".git"'
 
 # Navigation
+alias ls='ls --color'
 alias ll='ls -alhG'
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
