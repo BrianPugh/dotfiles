@@ -12,3 +12,4 @@ email = bnp117@gmail.com
 	process = git-lfs filter-process
 [alias]
 	cleanup = !"git branch --merged | grep -vE 'main|master|dev|develop|development|prod|production\\*' | xargs -n 1 git branch -D && git branch"
+	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-Public release.}\");};f"
