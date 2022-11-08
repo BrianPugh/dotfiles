@@ -32,24 +32,37 @@ else
 
   # Easy to install things
   $SUDO apt install -y \
+    autoconf \
+    automake \
+    cmake \
     curl \
+    doxygen \
     fd-find \
     file \
+    g++ \
+    gettext \
     git \
+    libtool \
+    libtool-bin \
+    ninja-build \
+    pkg-config \
     python3-dev \
     python3-pip \
     ripgrep \
     snapd \
     software-properties-common \
     tmux \
+    unzip \
     wget \
     zsh \
 
-  $SUDO snap install wormhole
   python3 -m pip install --upgrade pip
+  python3 -m pip install pipx
+  python3 -m pipx ensurepath
+  pipx install magic-wormhole
 
   # Install Python CLI tools
-  python3 -m pip install pre-commit
+  pipx install pre-commit
 
   # Change default shell to zsh
   chsh -s $(which zsh)
@@ -80,7 +93,10 @@ else
   $SUDO apt install -y nodejs
 
   # Install neovim
-  $SUDO snap install nvim --channel=latest/edge --classic
+  git clone https://github.com/neovim/neovim
+  cd neovim
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  $SUDO make install
 
   # Install neovim plugins
   nvim +PackerCompile +PackerSync
