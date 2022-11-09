@@ -3,7 +3,7 @@ precmd () {print -Pn "\e]0;%~\a"}
 export PROMPT="%m:%~$ "
 
 # Search
-alias grep='grep --exclude-dir=".git"'
+alias grep='grep --exclude-dir=".venv" --exclude-dir=".git"'
 
 # Navigation
 alias ls='ls --color'
