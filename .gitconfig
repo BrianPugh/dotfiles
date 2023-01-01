@@ -15,3 +15,7 @@ email = bnp117@gmail.com
 	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-Public release.}\");};f"
 [push]
 	autoSetupRemote = true
+[core]
+	pager = delta --line-numbers --dark
+[delta]
+	side-by-side = true

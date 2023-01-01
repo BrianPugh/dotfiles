@@ -19,7 +19,7 @@ if [ "$system_type" = "Darwin" ]; then
   fi
 
   # Install packages
-  brew install curl neovim tmux ripgrep fd node pyenv
+  brew install curl neovim tmux ripgrep fd node pyenv git-delta
 
   # Setup Python
   python_version=3.9.9  # We'll upgrade to 3.10 as it gets more popular
@@ -68,21 +68,25 @@ else
   chsh -s $(which zsh)
 
   # Install bat (improved cat replacement)
+  BAT_VERSION=0.20.0
   if [ "$system_arch" = "aarch64" ]; then
-    BAT_DEB_FN=bat_0.20.0_arm64.deb
+    BAT_DEB_FN=bat_${BAT_VERSION}_arm64.deb
   elif [ "$system_arch" = "x86_64" ]; then
-    BAT_DEB_FN=bat_0.20.0_amd64.deb
+    BAT_DEB_FN=bat_${BAT_VERSION}_amd64.deb
   elif [ "$system_arch" = "armv7l" ]; then
     # 32-bit Raspberry pi
-    BAT_DEB_FN=bat_0.20.0_armhf.deb
+    BAT_DEB_FN=bat_${BAT_VERSION}_armhf.deb
   else
     echo "Unknown system architecture $system_arch"
     exit 1
   fi
 
-  wget https://github.com/sharkdp/bat/releases/download/v0.20.0/$BAT_DEB_FN
+  wget https://github.com/sharkdp/bat/releases/download/v$BAT_VERSION/$BAT_DEB_FN
   $SUDO apt install ./$BAT_DEB_FN
   rm $BAT_DEB_FN
+
+  # Install git-delta
+  # TODO: https://dandavison.github.io/delta/installation.html
 
   # Install node
   if [ -z "$SUDO" ]; then

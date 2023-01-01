@@ -63,6 +63,7 @@ export PATH="$HOME/.local/bin:$PATH"
 if [[ `uname` == "Darwin" ]]; then
   # MacOS
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  alias brew='arch -arm64 brew'
 else
   # debian
   export PATH=$PATH:/snap/bin
