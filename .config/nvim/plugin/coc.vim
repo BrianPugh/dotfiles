@@ -138,7 +138,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " workaround for running isort on save
-autocmd BufWrite *.py :CocCommand python.sortImports
+autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
 
 " Install extensions
 let g:coc_global_extensions = ['coc-pyright', 'coc-json', 'coc-docker', 'coc-yaml', 'coc-prettier', 'coc-snippets']

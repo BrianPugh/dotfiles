@@ -2,6 +2,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["py", "python", "yaml", "json"],
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "black",
+  "python.sortImports.path": "isort",
   "diagnostic.checkCurrentLine": true,
   "snippets.ultisnips.directories":
   [
