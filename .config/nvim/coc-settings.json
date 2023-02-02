@@ -3,6 +3,9 @@
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "black",
   "python.sortImports.path": "isort",
+  "python.sortImports.args": [
+    "--settings-path", "${workspaceFolder}"
+  ],
   "diagnostic.checkCurrentLine": true,
   "snippets.ultisnips.directories":
   [
