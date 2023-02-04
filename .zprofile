@@ -16,6 +16,10 @@ alias gs='git status'
 alias gd='git diff'
 alias ga='git add'
 alias gc='git commit -m'
+function gtouch {
+  touch $1
+  git add $1
+}
 
 # yadm
 alias ys='yadm status'

@@ -4,7 +4,7 @@
   "python.formatting.provider": "black",
   "python.sortImports.path": "isort",
   "python.sortImports.args": [
-    "--settings-path", "${workspaceFolder}"
+    "--profile", "black"
   ],
   "diagnostic.checkCurrentLine": true,
   "snippets.ultisnips.directories":
