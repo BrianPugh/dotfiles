@@ -83,6 +83,9 @@ bindkey "\E[3~" delete-char
 bindkey "^[OF" end-of-line
 bindkey "^[OH" beginning-of-line
 
+# tmux
+# Kill all unattached sessions.
+alias tmux-clean='tmux ls | grep -v attached | awk -F: '{print $1}' | xargs -I{} tmux kill-session -t {}'
 
 # Pushes to the remote that the PR was created from
 # Useful for open source projects that allows maintainers to edit
