@@ -53,7 +53,7 @@ require('telescope').setup {}
 nnoremap(';', 'isdirectory(\'.git\') ? \':lua require("telescope.builtin").git_files()<CR>\' : \':lua require("telescope.builtin").find_files()<CR>\'', {"silent", "expr"}
   )
 nnoremap('<leader>;', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], "silent")
-nnoremap('<leader>gr', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "silent")
+nnoremap('\'', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "silent")
 
 -- ALE
 vim.g.ale_fix_on_save = 1

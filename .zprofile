@@ -82,3 +82,28 @@ bindkey "\E[F" end-of-line
 bindkey "\E[3~" delete-char
 bindkey "^[OF" end-of-line
 bindkey "^[OH" beginning-of-line
+
+
+# Pushes to the remote that the PR was created from
+# Useful for open source projects that allows maintainers to edit
+# Requires "brew install jq"
+# Requires "brew install github/gh/gh"
+function pr_push {
+  ORG_AND_REPO=$(git remote get-url origin | sed -E 's/^.*github.com[:\/]?([^\/]*)\/(.*)\.git$/\1\/\2/')
+  REMOTE_URL=$(curl https://api.github.com/repos/$ORG_AND_REPO/pulls/${1:?"The PR number must be specified"} | jq .head.repo.ssh_url | tr -d '"')
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+  echo "Going to execute: git push $REMOTE_URL $BRANCH"
+
+  $(git push $REMOTE_URL $BRANCH)
+}
+
+# Push equivalent of https://cli.github.com/manual/gh_pr_checkout
+# gh pr push <pr_number>
+gh() {
+  if [ "$1" = "pr" ] && [ "$2" = "push" ]; then
+    pr_push $3
+  else
+    command gh "$@"
+  fi
+}
