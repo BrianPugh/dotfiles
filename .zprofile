@@ -18,7 +18,7 @@ alias ga='git add'
 alias gc='git commit -m'
 function gtouch {
   touch $1
-  git add $1
+  git add --intent-to-add $1
 }
 
 # yadm
