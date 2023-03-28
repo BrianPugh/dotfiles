@@ -8,6 +8,7 @@ vim.o.history = 1000
 vim.o.startofline = true
 vim.o.mouse = 'a'  -- Enable mouse
 vim.o.pastetoggle='<F2>'  -- F2 to toggle paste mode
+vim.o.maxmempattern = 5000
 
 -- Clipboard
 vim.o.clipboard = vim.o.clipboard .. 'unnamed'

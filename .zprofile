@@ -110,3 +110,6 @@ gh() {
     command gh "$@"
   fi
 }
+
+# QMK
+export QMK_HOME='~/projects/qmk_firmware'
