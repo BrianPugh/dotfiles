@@ -9,6 +9,7 @@ vim.o.startofline = true
 vim.o.mouse = 'a'  -- Enable mouse
 vim.o.pastetoggle='<F2>'  -- F2 to toggle paste mode
 vim.o.maxmempattern = 5000
+vim.o.showtabline = 2  -- Show the tabline, even if only one file is open
 
 -- Clipboard
 vim.o.clipboard = vim.o.clipboard .. 'unnamed'
