@@ -112,3 +112,18 @@ gh() {
 
 # QMK
 export QMK_HOME='~/projects/qmk_firmware'
+
+# PngCrush
+# Function to pngcrush all PNG files in the current directory
+pngcrush_all() {
+  if command -v pngcrush >/dev/null; then
+    for file in ./*.png; do
+      if [ -f "$file" ]; then
+        pngcrush -ow -brute "$file"
+        echo "Compressed: $file"
+      fi
+    done
+  else
+    echo "Error: pngcrush is not installed. Please install it and try again."
+  fi
+}
