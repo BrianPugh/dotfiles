@@ -42,6 +42,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 export PYTHONSTARTUP="${HOME}/.startup.py"
 export PATH="$HOME/python_scripts:$PATH"
+export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Vim
 alias vim='nvim'
@@ -126,4 +127,29 @@ pngcrush_all() {
   else
     echo "Error: pngcrush is not installed. Please install it and try again."
   fi
+}
+
+function cumulative_size() {
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: cumulative_size <folder_path> <extension>"
+    return 1
+  fi
+
+  folder_path="$1"
+  extension="$2"
+
+  if [[ ! -d "$folder_path" ]]; then
+    echo "Error: '$folder_path' is not a valid directory"
+    return 1
+  fi
+
+  total_size=0
+
+  while IFS= read -r -d '' file; do
+    file_size=$(stat -f%z "$file")
+    total_size=$((total_size + file_size))
+  done < <(find "$folder_path" -type f -iname "*.${extension}" -print0)
+
+  formatted_size=$(printf "%'.f" "$total_size")
+  echo "Cumulative size of all .${extension} files in '${folder_path}': ${formatted_size} bytes"
 }
