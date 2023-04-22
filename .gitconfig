@@ -17,6 +17,8 @@ email = bnp117@gmail.com
 	squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-Public release.}\");};f"
 	# Delete a remote tag
     deltag = !sh -c 'git tag -d $1 && git push origin :refs/tags/$1' -
+	# Resolve poetry.lock merge conflicts
+	resolve-poetry = !"git checkout --theirs poetry.lock && poetry lock --no-update && poetry install && git add poetry.lock"
 [push]
 	autoSetupRemote = true
 [core]
