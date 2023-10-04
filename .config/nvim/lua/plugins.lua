@@ -55,15 +55,6 @@ nnoremap(';', 'isdirectory(\'.git\') ? \':lua require("telescope.builtin").git_f
 nnoremap('<leader>;', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], "silent")
 nnoremap('\'', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "silent")
 
--- ALE
-vim.g.ale_fix_on_save = 1
-vim.g.ale_linters = {
-  python={'flake8', 'pylint'},
-}
-vim.g.ale_fixers = {
-  python={'black'},
-}
-
 -- Indent-Blankline
 vim.opt.termguicolors = true
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]

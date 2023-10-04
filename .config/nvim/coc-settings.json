@@ -1,7 +1,11 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["py", "python", "yaml", "json"],
+  "coc.preferences.formatOnSaveFiletypes": ["pyx", "py", "python", "yaml", "json"],
   "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=120 --ignore='E203'"
+  ],
   "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "120"],
   "python.sortImports.path": "isort",
   "python.sortImports.args": [
     "--profile", "black"
@@ -11,5 +15,6 @@
   [
     "UltiSnips",
     "~/.config/nvim/utils/snips"
-  ]
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }
