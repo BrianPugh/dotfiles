@@ -25,3 +25,5 @@ email = bnp117@gmail.com
     pager = delta --line-numbers --dark
 [delta]
     side-by-side = true
+[pull]
+	ff = only
