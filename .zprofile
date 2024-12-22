@@ -12,6 +12,7 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
 # Git
+alias g='git'
 alias gs='git status'
 alias gd='git diff'
 alias ga='git add'
@@ -30,6 +31,11 @@ alias yc='yadm commit -m'
 # Misc
 alias cat='bat'
 alias sudo='sudo '
+
+# Python
+export PYTEST_ADDOPTS='--pdbcls=IPython.terminal.debugger:Pdb'
+alias p='poetry run python -m pytest -s -x --pdb'
+alias pdb='poetry run python -m ipdb -c "c"'
 
 # ARM Development
 export GCC_PATH=/Applications/ARM/bin
