@@ -6,10 +6,6 @@
   ],
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": ["--line-length", "120"],
-  "python.sortImports.path": "isort",
-  "python.sortImports.args": [
-    "--profile", "black"
-  ],
   "diagnostic.checkCurrentLine": true,
   "snippets.ultisnips.directories":
   [
