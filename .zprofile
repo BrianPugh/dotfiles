@@ -1,6 +1,10 @@
+#export XDG_CONFIG_HOME="$HOME/.config"
+#export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+#export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+
 # Prompt and title
 precmd () {print -Pn "\e]0;%~\a"}
-export PROMPT="%m:%~$ "
+export PROMPT="%~$ "
 
 # Search
 alias grep='grep --exclude-dir=".venv" --exclude-dir=".git"'
@@ -38,13 +42,14 @@ alias p='poetry run python -m pytest -s -x --pdb'
 alias pdb='poetry run python -m ipdb -c "c"'
 
 # ARM Development
-export GCC_PATH=/Applications/ARM/bin
+export GCC_PATH=/opt/homebrew/bin/
 
 # Python
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
 fi
 export PYTHONSTARTUP="${HOME}/.startup.py"
 export PATH="$HOME/python_scripts:$PATH"
@@ -159,3 +164,9 @@ function cumulative_size() {
   formatted_size=$(printf "%'.f" "$total_size")
   echo "Cumulative size of all .${extension} files in '${folder_path}': ${formatted_size} bytes"
 }
+
+export PATH=/opt/openocd-git/bin:$PATH
+
+fpath=(~/.zsh/completion $fpath)
+autoload -U compinit
+compinit
