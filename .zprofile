@@ -170,3 +170,7 @@ export PATH=/opt/openocd-git/bin:$PATH
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit
+
+
+# Claude
+export PATH=~/.claude/local:$PATH
