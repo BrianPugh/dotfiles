@@ -167,10 +167,31 @@ function cumulative_size() {
 
 export PATH=/opt/openocd-git/bin:$PATH
 
-fpath=(~/.zsh/completion $fpath)
+fpath=(~/.zsh/completions $fpath)
 autoload -U compinit
 compinit
 
 
 # Claude
 export PATH=~/.claude/local:$PATH
+
+# GitHub Notifications - Mark all as read
+function github_mark_read() {
+  if [[ -z "$GITHUB_NOTIFICATIONS_TOKEN" ]]; then
+    echo "Error: TOKEN environment variable is not set"
+    return 1
+  fi
+
+  curl -X PUT \
+    -H "Accept: application/vnd.github.v3+json" \
+    -H "Authorization: token $GITHUB_NOTIFICATIONS_TOKEN" \
+    https://api.github.com/notifications \
+    -d @<(cat <<EOF
+{
+  "last_read_at": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+}
+EOF
+)
+}
+export UV_PROJECT_ENVIRONMENT=.venv
+

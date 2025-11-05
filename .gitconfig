@@ -37,3 +37,6 @@ email = bnp117@gmail.com
     side-by-side = true
 [pull]
 	ff = only
+[merge]
+	tool = nvimdiff
+    conflictstyle = zdiff3
