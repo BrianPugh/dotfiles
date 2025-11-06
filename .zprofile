@@ -175,6 +175,23 @@ compinit
 # Claude
 export PATH=~/.claude/local:$PATH
 
+# SDK Management
+function activate() {
+  case "$1" in
+    emsdk)
+      ~/sdk/emsdk/emsdk activate latest
+      ;;
+    esp-idf)
+      . ~/sdk/esp-idf/export.sh
+      ;;
+    *)
+      echo "Unknown SDK: $1"
+      echo "Usage: activate {emsdk|esp-idf}"
+      return 1
+      ;;
+  esac
+}
+
 # GitHub Notifications - Mark all as read
 function github_mark_read() {
   if [[ -z "$GITHUB_NOTIFICATIONS_TOKEN" ]]; then
