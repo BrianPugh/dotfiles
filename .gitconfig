@@ -30,6 +30,7 @@ email = bnp117@gmail.com
 	cleanup-stale = "!f() { \\\n    if [[ \"$OSTYPE\" == \"darwin\"* ]]; then \\\n        EXPIRY_DATE=$(date -v-8w +\"%Y-%m-%d\"); \\\n    else \\\n        EXPIRY_DATE=$(date +\"%Y-%m-%d\" -d \"-8 week\"); \\\n    fi; \\\n    DRY_RUN=${1:-true}; \\\n    echo \"Checking for stale local branches (older than $EXPIRY_DATE)...\"; \\\n    git for-each-ref --format=\"%(committerdate:short) %(refname:short)\" \\\n        --sort -committerdate refs/heads | \\\n        while read date branch; do \\\n            if [[ $branch =~ ^(main|master|dev|develop|development|prod|production|HEAD)$ ]]; then \\\n                printf \"%9s | %s | %50s\\n\" \"PROTECTED\" \"$date\" \"$branch\"; \\\n            elif [[ \"$date\" < \"$EXPIRY_DATE\" ]]; then \\\n                printf \"%9s | %s | %50s\\n\" \"DELETE\" \"$date\" \"$branch\"; \\\n                if [[ \"$DRY_RUN\" == \"false\" ]]; then \\\n                    git branch -D \"$branch\"; \\\n                fi; \\\n            fi; \\\n        done; \\\n    if [[ \"$DRY_RUN\" == \"true\" ]]; then \\\n        echo \"\\nThis was a dry run. To actually delete branches, run:\"; \\\n        echo \"git cleanup-stale false\"; \\\n    fi; \\\n}; f"
 [push]
     autoSetupRemote = true
+	default = current
 [core]
     pager = delta --line-numbers --dark
 	trustctime = false
