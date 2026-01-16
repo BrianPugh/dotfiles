@@ -41,3 +41,5 @@ email = bnp117@gmail.com
 [merge]
 	tool = nvimdiff
     conflictstyle = zdiff3
+[diff]
+	context = 16
