@@ -6,6 +6,16 @@
 precmd () {print -Pn "\e]0;%~\a"}
 export PROMPT="%~$ "
 
+# History configuration
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt APPEND_HISTORY         # Append rather than overwrite
+setopt INC_APPEND_HISTORY     # Write immediately to history file
+setopt HIST_IGNORE_DUPS       # Don't record duplicate consecutive commands
+setopt HIST_FIND_NO_DUPS      # Don't display duplicates when searching
+setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks
+
 # Search
 alias grep='grep --exclude-dir=".venv" --exclude-dir=".git"'
 
@@ -43,6 +53,7 @@ alias pdb='poetry run python -m ipdb -c "c"'
 
 # ARM Development
 export GCC_PATH=/opt/homebrew/bin/
+export PATH="/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin:$PATH"
 
 # Python
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -175,18 +186,31 @@ compinit
 # Claude
 export PATH=~/.claude/local:$PATH
 
+# Get local IP address
+myip() {
+  ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null
+}
+
 # SDK Management
 function activate() {
   case "$1" in
     emsdk)
-      ~/sdk/emsdk/emsdk activate latest
+      source ~/sdk/emsdk/emsdk_env.sh
       ;;
     esp-idf)
-      . ~/sdk/esp-idf/export.sh
+      source ~/sdk/esp-idf/export.sh
+      ;;
+    micropython|mpy)
+      export MPY_DIR=~/sdk/micropython
+      echo "MPY_DIR set to $MPY_DIR"
+      ;;
+    pico-sdk|pico)
+      export PICO_SDK_PATH=~/sdk/pico-sdk
+      echo "PICO_SDK_PATH set to $PICO_SDK_PATH"
       ;;
     *)
       echo "Unknown SDK: $1"
-      echo "Usage: activate {emsdk|esp-idf}"
+      echo "Usage: activate {emsdk|esp-idf|micropython|mpy|pico-sdk|pico}"
       return 1
       ;;
   esac
@@ -212,3 +236,4 @@ EOF
 }
 export UV_PROJECT_ENVIRONMENT=.venv
 
+source <(fzf --zsh)
