@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key>        <string>com.brianpugh.kill-idle-claude</string>
+  <key>ProgramArguments</key>
+    <array><string>/Users/brianpugh/bin/kill-idle-claude.sh</string></array>
+  <key>StartInterval</key><integer>900</integer>
+  <key>StandardOutPath</key>  <string>/Users/brianpugh/Library/Logs/kill-idle-claude.out.log</string>
+  <key>StandardErrorPath</key><string>/Users/brianpugh/Library/Logs/kill-idle-claude.err.log</string>
+</dict></plist>
