@@ -48,7 +48,8 @@ alias sudo='sudo '
 
 # Python
 export PYTEST_ADDOPTS='--pdbcls=IPython.terminal.debugger:Pdb'
-alias p='poetry run python -m pytest -s -x --pdb'
+alias pp='poetry run python -m pytest -s -x --pdb'
+alias up='uv run python -m pytest -s -x --pdb'
 alias pdb='poetry run python -m ipdb -c "c"'
 alias bump='bump-my-version'
 

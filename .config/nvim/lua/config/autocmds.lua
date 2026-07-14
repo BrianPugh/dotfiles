@@ -25,6 +25,22 @@ autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   desc = "Auto-reload buffers when files change externally",
 })
 
+-- Detect Jinja-templated YAML files: disable treesitter and use vim syntax + jinja overlay
+autocmd("BufWinEnter", {
+  pattern = { "*.yml", "*.yaml" },
+  callback = function()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, 50, false)
+    for _, line in ipairs(lines) do
+      if line:match("{%%") or line:match("{{") then
+        vim.treesitter.stop(0)
+        vim.bo.syntax = "yaml"
+        return
+      end
+    end
+  end,
+  desc = "Use vim syntax + Jinja overlay for Jinja-templated YAML files",
+})
+
 -- Optional: Add notification when files have changed externally
 autocmd("FileChangedShellPost", {
   pattern = "*",
