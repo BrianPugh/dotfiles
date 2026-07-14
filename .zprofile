@@ -50,9 +50,10 @@ alias sudo='sudo '
 export PYTEST_ADDOPTS='--pdbcls=IPython.terminal.debugger:Pdb'
 alias p='poetry run python -m pytest -s -x --pdb'
 alias pdb='poetry run python -m ipdb -c "c"'
+alias bump='bump-my-version'
 
 # ARM Development
-export GCC_PATH=/opt/homebrew/bin/
+export GCC_PATH=/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin
 export PATH="/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin:$PATH"
 
 # Python
@@ -218,21 +219,7 @@ function activate() {
 
 # GitHub Notifications - Mark all as read
 function github_mark_read() {
-  if [[ -z "$GITHUB_NOTIFICATIONS_TOKEN" ]]; then
-    echo "Error: TOKEN environment variable is not set"
-    return 1
-  fi
-
-  curl -X PUT \
-    -H "Accept: application/vnd.github.v3+json" \
-    -H "Authorization: token $GITHUB_NOTIFICATIONS_TOKEN" \
-    https://api.github.com/notifications \
-    -d @<(cat <<EOF
-{
-  "last_read_at": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-}
-EOF
-)
+  gh api -X PUT /notifications -f "last_read_at=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 }
 export UV_PROJECT_ENVIRONMENT=.venv
 
