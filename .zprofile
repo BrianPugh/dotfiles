@@ -53,19 +53,12 @@ alias up='uv run python -m pytest -s -x --pdb'
 alias pdb='poetry run python -m ipdb -c "c"'
 alias bump='bump-my-version'
 
-# ARM Development
-export GCC_PATH=/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin
-export PATH="/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin:$PATH"
-
 # Python
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-export PYTHONSTARTUP="${HOME}/.startup.py"
-export PATH="$HOME/python_scripts:$PATH"
 export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Vim
@@ -135,9 +128,6 @@ gh() {
   fi
 }
 
-# QMK
-export QMK_HOME='~/projects/qmk_firmware'
-
 # PngCrush
 # Function to pngcrush all PNG files in the current directory
 pngcrush_all() {
@@ -178,15 +168,10 @@ function cumulative_size() {
   echo "Cumulative size of all .${extension} files in '${folder_path}': ${formatted_size} bytes"
 }
 
-export PATH=/opt/openocd-git/bin:$PATH
-
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit
 compinit
 
-
-# Claude
-export PATH=~/.claude/local:$PATH
 
 # Get local IP address
 myip() {
@@ -202,6 +187,12 @@ function activate() {
     esp-idf)
       source ~/sdk/esp-idf/export.sh
       ;;
+    ncs|zephyr)
+      # Toolchain is forced into /opt/nordic on macOS; the west workspace lives in ~/sdk/ncs.
+      source <(~/.local/bin/nrfutil sdk-manager toolchain env --ncs-version ${NCS_VERSION:?set NCS_VERSION in ~/.zsystem} --as-script sh)
+      source ~/sdk/ncs/zephyr/zephyr-env.sh
+      echo "NCS $NCS_VERSION active, ZEPHYR_BASE=$ZEPHYR_BASE"
+      ;;
     micropython|mpy)
       export MPY_DIR=~/sdk/micropython
       echo "MPY_DIR set to $MPY_DIR"
@@ -212,7 +203,7 @@ function activate() {
       ;;
     *)
       echo "Unknown SDK: $1"
-      echo "Usage: activate {emsdk|esp-idf|micropython|mpy|pico-sdk|pico}"
+      echo "Usage: activate {emsdk|esp-idf|ncs|zephyr|micropython|mpy|pico-sdk|pico}"
       return 1
       ;;
   esac
@@ -225,3 +216,9 @@ function github_mark_read() {
 export UV_PROJECT_ENVIRONMENT=.venv
 
 source <(fzf --zsh)
+
+# Claude Code: its shells set CLAUDECODE=1. Drop display-only aliases there so
+# ls/cat emit plain text (ls --color and bat inject ANSI codes into parsed output).
+if [[ -n "$CLAUDECODE" ]]; then
+  unalias ls ll cat 2>/dev/null
+fi
