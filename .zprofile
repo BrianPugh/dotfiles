@@ -20,8 +20,9 @@ setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks
 alias grep='grep --exclude-dir=".venv" --exclude-dir=".git"'
 
 # Navigation
-alias ls='ls --color'
-alias ll='ls -alhG'
+# BSD ls has no --color
+[[ $OSTYPE == darwin* ]] && alias ls='ls -G' || alias ls='ls --color=auto'
+alias ll='ls -alh'
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 
@@ -43,7 +44,8 @@ alias ya='yadm add'
 alias yc='yadm commit -m'
 
 # Misc
-alias cat='bat'
+# Debian ships bat as batcat
+command -v batcat >/dev/null && alias cat='batcat' || alias cat='bat'
 alias sudo='sudo '
 
 # Python
@@ -82,14 +84,14 @@ test -f ~/.zsystem && source ~/.zsystem
 # python applications
 export PATH="$HOME/.local/bin:$PATH"
 
-if [[ `uname` == "Darwin" ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   # MacOS
   eval "$(/opt/homebrew/bin/brew shellenv)"
   alias brew='arch -arm64 brew'
 else
   # debian
   export PATH=$PATH:/snap/bin
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  test -f /usr/share/doc/fzf/examples/key-bindings.zsh && source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
 
 # misc keybindings
@@ -160,7 +162,7 @@ function cumulative_size() {
   total_size=0
 
   while IFS= read -r -d '' file; do
-    file_size=$(stat -f%z "$file")
+    file_size=$(wc -c < "$file")
     total_size=$((total_size + file_size))
   done < <(find "$folder_path" -type f -iname "*.${extension}" -print0)
 
@@ -175,7 +177,9 @@ compinit
 
 # Get local IP address
 myip() {
-  ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null
+  ipconfig getifaddr en0 2>/dev/null \
+    || ipconfig getifaddr en1 2>/dev/null \
+    || hostname -I 2>/dev/null | awk '{print $1}'
 }
 
 # SDK Management
@@ -215,7 +219,7 @@ function github_mark_read() {
 }
 export UV_PROJECT_ENVIRONMENT=.venv
 
-source <(fzf --zsh)
+fzf --zsh &>/dev/null && source <(fzf --zsh)
 
 # Claude Code: its shells set CLAUDECODE=1. Drop display-only aliases there so
 # ls/cat emit plain text (ls --color and bat inject ANSI codes into parsed output).

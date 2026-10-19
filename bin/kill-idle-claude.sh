@@ -3,7 +3,7 @@
 IDLE_LIMIT=$((4*60*60))          # seconds
 now=$(date +%s)
 
-ps -axo pid=,tty=,args= | awk '/[c]laude/ && $3=="claude"{print $1, $2}' |
+ps -axo pid=,tty=,args= | awk '$3 ~ /(^|\/)claude$/ {print $1, $2}' |
 while read -r pid tty; do
   [ "$tty" = "??" ] && continue          # no controlling terminal
   dev="/dev/$tty"
