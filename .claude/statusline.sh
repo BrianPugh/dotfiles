@@ -2,7 +2,8 @@
 # Claude Code status line: context, 5-hour session limit, and weekly limit usage.
 # Reads the status-line JSON on stdin (https://code.claude.com/docs/en/statusline).
 
-IFS=$'\x1f' read -r CTX FIVE FIVE_RESET WEEK WEEK_RESET < <(jq -r '[
+IFS=$'\x1f' read -r MODEL CTX FIVE FIVE_RESET WEEK WEEK_RESET < <(jq -r '[
+  (.model.display_name // .model.id // "?"),
   (.context_window.current_usage
     | if . then .input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens else "" end),
   (.rate_limits.five_hour.used_percentage // ""),
@@ -70,4 +71,4 @@ limits_segment() {
     "$([[ -n $WEEK_RESET ]] && until_reset "$WEEK_RESET" || echo --)"
 }
 
-printf '%s %s│%s %s\n' "$(ctx_segment)" "$DIM" "$RESET" "$(limits_segment)"
+printf '\033[36m%s%s %s│%s %s %s│%s %s\n' "$MODEL" "$RESET" "$DIM" "$RESET" "$(ctx_segment)" "$DIM" "$RESET" "$(limits_segment)"
