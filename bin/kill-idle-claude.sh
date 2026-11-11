@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Kill interactive `claude` sessions whose pty has been idle > 4h.
-IDLE_LIMIT=$((4*60*60))          # seconds
+# Kill interactive `claude` sessions whose pty has been idle > 24h.
+IDLE_LIMIT=$((24*60*60))          # seconds
 now=$(date +%s)
 
 ps -axo pid=,tty=,args= | awk '$3 ~ /(^|\/)claude$/ {print $1, $2}' |

@@ -73,7 +73,11 @@ A PR whose base is another open PR's branch can be part of a GitHub native stack
   `gh api -X PUT repos/O/R/pulls/N/merge-async -f sha=<full head sha> -f merge_method=merge -f merge_action=direct_merge`
   (HTTP 202 returns a `uuid`), then poll
   `gh api repos/O/R/pulls/N/merge-async/<uuid> --jq .status` until
-  `merged`/`failed`. Merging N also merges any open PRs *below* it.
+  `merged`/`failed`. Merging N doesn't reliably land the whole stack: on
+  2026-10-16, merging #97 of #95<-#96<-#97 merged #95 into main and #97 into
+  #96's branch, but left #96 open. Afterwards check every PR below N with
+  `gh pr list --state all`, and merge any still open at its new head (its tree
+  should equal the tested head: `git diff <tested> <new head>` empty).
 - After the bottom PR merges, GitHub retargets the child to main and rebases it
   itself (new SHAs, same patches). Verify with
   `git range-diff <old-base>..<old-head> origin/main..origin/<child-branch>`
